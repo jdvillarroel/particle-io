@@ -12,7 +12,11 @@ router.get("/", async (req, res) => {
   const particles = await loadParticles();
 
   // Fetch the last 8 hours of data
-  const data = await particles.find({}).limit(48).toArray();
+  const data = await particles
+    .find({})
+    .sort({ publishedAt: -1 })
+    .limit(48)
+    .toArray();
 
   // Return the data as json
   res.send(data);
