@@ -23,7 +23,7 @@ const client = async () => {
 router.get("/", async (req, res) => {
   // Get the particles collection
   // const particles = await loadParticles();
-  const particles = client.db("home").collection("jOffice");
+  const particles = await client.db("home").collection("jOffice");
 
   // Fetch the last 8 hours of data
   const data = await particles
@@ -39,7 +39,7 @@ router.get("/", async (req, res) => {
 // POST /api/particles
 router.post("/", async (req, res) => {
   // const particles = await loadParticles();
-  const particles = client.db("home").collection("jOffice");
+  const particles = await client.db("home").collection("jOffice");
 
   // Create a particle with the data sent from client
   let newData = {
