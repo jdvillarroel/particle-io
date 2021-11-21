@@ -14,7 +14,6 @@ const client = new MongoClient(mongoDBURI, { useNewUrlParser: true });
 router.get("/", async (req, res) => {
   // Get the particles collection
   const particles = await loadParticles();
-  // const particles = await client.db("home").collection("jOffice");
 
   // Fetch the last 8 hours of data
   const data = await particles
@@ -33,7 +32,6 @@ router.get("/", async (req, res) => {
 // POST /api/particles
 router.post("/", async (req, res) => {
   const particles = await loadParticles();
-  // const particles = await client.db("home").collection("jOffice");
 
   // Create a particle with the data sent from client
   let newData = {
@@ -56,17 +54,12 @@ router.post("/", async (req, res) => {
 
 // Load the particles collection
 const loadParticles = async () => {
-  // const client = await mongodb.MongoClient.connect(mongoDBURL, {
-  //   useNewUrlParser: true,
-  // });
   try {
     await client.connect();
     return client.db("home").collection("jOffice");
   } catch (error) {
     console.error(error);
   }
-
-  // return await client.db("home").collection("jOffice");
 };
 
 module.exports = router;
