@@ -18,6 +18,9 @@ router.get("/", async (req, res) => {
     .limit(48)
     .toArray();
 
+  // Close connection to MongoDB
+  await particles.close();
+
   // Return the data as json
   res.send(data);
 });
@@ -37,6 +40,9 @@ router.post("/", async (req, res) => {
 
   // Insert the new particle into the collection
   const data = await particles.insertOne(newData);
+
+  // Close database connection
+  await particles.close();
 
   // Send response to the client
   res.status(201).send();
